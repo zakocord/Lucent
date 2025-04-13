@@ -1,0 +1,16 @@
+requests
+socket
+time
+psutil
+string
+platform
+subprocess
+json
+base64
+random
+re
+wmi
+os
+pyautogui
+tempfile
+colorama
