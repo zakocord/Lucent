@@ -8,7 +8,6 @@
     <br>
     <br>
     <br>
-    <img src="https://raw.githubusercontent.com/zakocord/Nekocord/refs/heads/main/img/rat.png">
 </div>
 
 <hr>
