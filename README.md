@@ -18,11 +18,9 @@
 
 ---
 
-## 📖 How Use
+## 📖 Feature
 <div align="center">
-    <a href="https://www.youtube.com/watch?v=LZqcU6LzVuU" target="_blank">
-        <p>WATCH THE VIDEO</p>
-        <img src="https://img.youtube.com/vi/LZqcU6LzVuU/0.jpg" alt="Watch the video">
+    <img src="https://raw.githubusercontent.com/zakocord/Nekocord/refs/heads/main/img/showcase.jpg">
     </a>
 </div>
 
