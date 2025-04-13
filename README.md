@@ -14,7 +14,9 @@
 <hr>
 
 ## 📝 Todo
-- [ ] Multi Platfrom Support (Mac, linux)
+- [ ] Discord Token Grabber (PLS Pull 😭)
+- [ ] Cookie Grabber (PLS Pull 😭)
+- [ ] Better Visual
 
 ---
 
