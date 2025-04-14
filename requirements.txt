@@ -5,3 +5,5 @@ pyautogui
 browser-cookie3
 pycryptodome
 pypiwin32
+pyinstaller
+nuitka
