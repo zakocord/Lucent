@@ -14,7 +14,6 @@
 
 ## 📝 Todo
 - [ ] Discord Token Grabber (PLS Pull 😭)
-- [ ] Cookie Grabber (PLS Pull 😭)
 - [ ] Better Visual
 
 ---
