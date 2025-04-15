@@ -1,9 +1,10 @@
 requests
 psutil
+pywin32
 wmi
 pyautogui
 browser-cookie3
 pycryptodome
-pypiwin32
 pyinstaller
 nuitka
+colorama
