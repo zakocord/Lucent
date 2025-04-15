@@ -21,8 +21,12 @@
 
 ## 📖 Feature
 <div align="center">
-    <img src="https://raw.githubusercontent.com/zakocord/Nekocord/refs/heads/main/img/showcase.jpg">
-    </a>
+    <p>🟢 Screenshot<p>
+    <p>🟢 IP Logger<p>
+    <p>🟢 Machine Info<p>
+    <p>🟡 Cookie Grab<p>
+    <p>🔴 Token Grabber<p>
+    <p>🟢 ~ Working | 🟡 ~ Testing | 🔴 ~ Not Working <p>
 </div>
 
 ---
