@@ -23,9 +23,9 @@
     <p>🟢 Screenshot<p>
     <p>🟢 IP Logger<p>
     <p>🟢 Machine Info<p>
-    <p>🟡 Cookie Grab<p>
+    <p>❓️ Cookie Grab<p>
     <p>🔴 Token Grabber<p>
-    <p>🟢 ~ Working | 🟡 ~ Testing | 🔴 ~ Not Working <p>
+    <p>🟢 ~ Working | 🟡 ~ Testing | 🔴 ~ Not Working | ❓️ ~ insecurity<p>
 </div>
 
 ---
