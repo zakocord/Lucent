@@ -15,7 +15,7 @@
 ## 📝 Todo
 - [ ] Discord Token Grabber (PLS Pull 😭)
 - [ ] Better Visual
-
+- [ ] Fud 98%
 ---
 
 ## 📖 Feature
