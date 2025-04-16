@@ -29,6 +29,11 @@
 </div>
 
 ---
+# Requirements
+- [ ] Python 3.10
+- [ ] Brain
+- [ ] Windows 10 ~ 11
+---
 
 ## 💻️ Supported Platfrom
 - Windows
