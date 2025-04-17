@@ -7,7 +7,7 @@ import zipfile
 from io import BytesIO
 import shutil
 
-# Hello. 
+# Hello...... Fix
 
 colorama.init(autoreset=True)
 os.system("cls" if os.name == "nt" else "clear")
@@ -43,6 +43,10 @@ def download_and_extract_zip():
 
     with zipfile.ZipFile(BytesIO(response.content)) as zip_ref:
         zip_ref.extractall("_temp")
+
+    if not os.path.exists("_temp/Nekocord-main"):
+        print(f"{Fore.RED}[ERROR] {Fore.RESET} _temp/Nekocord-main folder not found!")
+        return
 
 def replace_current_folder(remote_v):
     print(f"{Fore.YELLOW}[INFO] Replacing current folder files...")
