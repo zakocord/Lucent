@@ -36,8 +36,6 @@
 
 ## 💻️ Supported Platfrom
 - Windows
-- [ ] Mac
-- [ ] Linux 
 
 ---
 
