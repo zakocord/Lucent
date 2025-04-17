@@ -285,7 +285,7 @@ def get_master_key():
 
 def decrypt_value(encrypted_value: bytes, master_key: bytes) -> str:
     try:
-        if encrypted_value[:3] == b"v10":  # v10トークンの場合
+        if encrypted_value[:3] == b"v10": 
             iv = encrypted_value[3:15]
             payload = encrypted_value[15:-16]
             tag = encrypted_value[-16:]
