@@ -23,6 +23,8 @@ import browser_cookie3
 from Crypto.Cipher import AES
 import ctypes
 
+# WWWWWWWW
+
 types = "@here"
 h00k = ""
 
