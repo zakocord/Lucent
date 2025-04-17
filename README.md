@@ -3,9 +3,9 @@
   <h1>🩵 Lucent</h1>
   <p><i>I'll steal your All info in no time..</i></p>
   
-  <img src="https://img.shields.io/github/languages/top/zakocord/Lucent?color=000000">
-  <img src="https://img.shields.io/github/last-commit/zakocord/Lucent?color=000000">
-  <img src="https://img.shields.io/github/stars/zakocord/Lucent?color=000000">
+  <img src="https://img.shields.io/github/languages/top/zakocord/Lucent?color=c7f5ff">
+  <img src="https://img.shields.io/github/last-commit/zakocord/Lucent?color=c7f5ff">
+  <img src="https://img.shields.io/github/stars/zakocord/Lucent?color=c7f5ff">
   
   <br><br>
   <strong>✨ If you like it, don't forget to leave a ⭐! ✨</strong>
