@@ -2,9 +2,74 @@ import subprocess
 import colorama
 from colorama import Fore
 import os
+import requests
+import zipfile
+from io import BytesIO
+import shutil
 
 colorama.init(autoreset=True)
 os.system("cls" if os.name == "nt" else "clear")
+
+def remote_v_string():
+    url = "https://raw.githubusercontent.com/zakocord/Nekocord/main/extra/v_string"
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.text.strip()
+
+def get_v_string():
+    try:
+        with open("extra/v_string", 'r') as file:
+            return file.read().strip()
+    except FileNotFoundError:
+        return None
+
+def download_and_extract_zip():
+    version = remote_v_string()
+    print(f"{Fore.YELLOW}[INFO] Downloading version {version}...")
+
+    response = requests.get("https://github.com/zakocord/Nekocord/archive/refs/heads/main.zip")
+    response.raise_for_status()
+
+    with zipfile.ZipFile(BytesIO(response.content)) as zip_ref:
+        zip_ref.extractall("_temp")
+
+def replace_current_folder(remote_v):
+    print(f"{Fore.YELLOW}[INFO] Replacing current folder files...")
+    source_dir = "_temp/Nekocord-main"
+
+    for item in os.listdir(source_dir):
+        s = os.path.join(source_dir, item)
+        d = os.path.join(".", item)
+        if os.path.isdir(s):
+            if os.path.exists(d):
+                shutil.rmtree(d)
+            shutil.copytree(s, d)
+        else:
+            shutil.copy2(s, d)
+
+    with open("extra/v_string", "w") as f:
+        f.write(remote_v)
+
+    shutil.rmtree("_temp")
+    print(f"{Fore.GREEN}[INFO] Update complete!")
+
+def update():
+    remote_v = remote_v_string()
+    local_v = get_v_string()
+
+    if local_v != remote_v:
+        os.system("title Update Available")
+        print(f"{Fore.CYAN}[INFO] Update available: {local_v} → {remote_v}")
+        choice = input("Update? (y/n): ").strip().lower()
+        if choice == 'y':
+            download_and_extract_zip()
+            replace_current_folder(remote_v)
+        else:
+            print("Update cancelled.")
+            os.system("cls")
+            os.system("nekocord")
+    else:
+        print(f"{Fore.GREEN}[INFO] You're already up-to-date.")
 
 ascii_art = """
                         ███╗   ██╗███████╗██╗  ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ██████╗ 
@@ -64,5 +129,6 @@ def build_exe():
         print(f"{Fore.RED}[ERROR] {Fore.RESET} pyinstaller is not found. Please install it using 'pip install pyinstaller'.")
 
 if __name__ == "__main__":
+    update()
     replace_hook_in_main()
     build_exe()
