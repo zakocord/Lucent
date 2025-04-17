@@ -34,6 +34,9 @@
 |------------------|--------|
 | Detected         | 🟢 |
 
+| Microsoft | Status |
+|------------------|--------|
+| Detected         | 🟢 |
 
 > > 🟢 Fully Undetectable | 🟡 Undetectable | 🔴 Detected | ❓ Unknown
 ## 🚀 Features
