@@ -29,14 +29,17 @@
 | Uncover it | Status |
 |------------------|--------|
 | Detected         | 🔴 |
+| FUD Rate         | 0% |
 
 | Nordvpn | Status |
 |------------------|--------|
 | Detected         | 🟢 |
+| FUD Rate         | 100% |
 
 | Microsoft | Status |
 |------------------|--------|
 | Detected         | 🟢 |
+| FUD Rate         | 100.0% |
 
 > > 🟢 Fully Undetectable | 🟡 Undetectable | 🔴 Detected | ❓ Unknown
 ## 🚀 Features
