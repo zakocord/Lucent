@@ -47,7 +47,7 @@
 | 🌐 IP Logger      | 🟢 Working |
 | 🖥 Machine Info   | 🟢 Working |
 | 🍪 Cookie Grab    | 🟢 Working |
-| 🎟 Token Grabber  | 🟡 Testing |
+| 🎟 Token Grabber  | 🔴 ERROR |
 
 > 🟢 Working | 🟡 Testing | 🔴 Not Working | ❓ Insecure / Experimental
 🕶️ Fud 82%
