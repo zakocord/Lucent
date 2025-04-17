@@ -23,8 +23,8 @@
 | Virustotal Detection | Status |
 |------------------|--------|
 | Total Engines    | 70     |
-| Detected         | 12     |
-| FUD Rate         | 🟡 |
+| Detected         | 🟡     |
+| FUD Rate         | 82.9% |
 
 | Uncover it | Status |
 |------------------|--------|
@@ -50,7 +50,6 @@
 | 🎟 Token Grabber  | 🔴 ERROR |
 
 > 🟢 Working | 🟡 Testing | 🔴 Not Working | ❓ Insecure / Experimental
-🕶️ Fud 82%
 
 ---
 
