@@ -78,7 +78,7 @@ def update():
             os.system("cls")
             os.system("title nekocord")
     else:
-        print(f"{Fore.YELLOW}[INFO]{Fore.RESET} Version-{local_v}")
+        print(f"{Fore.YELLOW}[INFO] No updates available, version: {local_v}")
 
 def build_exe(build_tool, command):
     print(f"{Fore.MAGENTA}[INFO] {Fore.RESET} Building with {build_tool}...")
@@ -116,6 +116,8 @@ def replace_hook_in_main():
                     build_exe("PyInstaller", ["pyinstaller", "--onefile", "src/asset/nekocord.py"])
                 else:
                     build_exe("Nuitka", ["nuitka", "--onefile", "src/asset/nekocord.py"])
+
+
             else:
                 print(f"{Fore.YELLOW}[INFO] {Fore.RESET} Build cancelled.")
                 continue
@@ -140,6 +142,7 @@ def replace_hook_in_main():
         print(f"{Fore.RED}[ERROR] {Fore.RESET} The file 'src/asset/nekocord.py' was not found.")
     except IOError as e:
         print(f"{Fore.RED}[ERROR] {Fore.RESET} Error reading/writing the file: {e}")
+
 if __name__ == "__main__":
     update()
     replace_hook_in_main()
