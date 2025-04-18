@@ -16,7 +16,6 @@
 
 ## 📌 Todo
 - [ ] 🖼 Better UI / Visual
-- [ ] 🔑 Add Token and Discord Cookie Grabber support
 ---
 
 ## 🔒 FUD Status
