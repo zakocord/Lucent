@@ -1,6 +1,6 @@
 <div align="center">
   
-  <h1>🩵 **Lucent**</h1>
+  <h1>🩵 **Lucent** 🩵</h1>
   <p><i>I'll steal your All info in no time...</i></p>
   
   <img src="https://img.shields.io/github/languages/top/zakocord/Lucent?color=c7f5ff" alt="Top Language">
