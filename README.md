@@ -16,6 +16,7 @@
 
 ## 📌 Todo
 - [ ] 🖼 **Better UI / Visual**
+- [ ] Kill Protector
 ---
 
 ## 🔒 **FUD Status**
