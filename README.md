@@ -58,6 +58,14 @@
 > 🟢 **Working** | 🟡 **Testing** | 🔴 **Not Working** | ❓ **Insecure / Experimental**
 
 ---
+## 🚀 **Screenshot**
+![Builder](https://raw.githubusercontent.com/zakocord/Lucent/refs/heads/main/img/preview_1.jpg)
+---
+![Token](https://raw.githubusercontent.com/zakocord/Lucent/refs/heads/main/img/preview_token.png)
+![Machine](https://raw.githubusercontent.com/zakocord/Lucent/refs/heads/main/img/preview_machine.png)
+![ss](https://raw.githubusercontent.com/zakocord/Lucent/refs/heads/main/img/preview_ss.png)
+
+---
 
 ## 🧠 **Requirements**
 
