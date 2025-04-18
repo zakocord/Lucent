@@ -1,11 +1,11 @@
 <div align="center">
   
-  <h1>🩵 Lucent</h1>
-  <p><i>I'll steal your All info in no time..</i></p>
+  <h1>🩵 **Lucent**</h1>
+  <p><i>I'll steal your All info in no time...</i></p>
   
-  <img src="https://img.shields.io/github/languages/top/zakocord/Lucent?color=c7f5ff">
-  <img src="https://img.shields.io/github/last-commit/zakocord/Lucent?color=c7f5ff">
-  <img src="https://img.shields.io/github/stars/zakocord/Lucent?color=c7f5ff">
+  <img src="https://img.shields.io/github/languages/top/zakocord/Lucent?color=c7f5ff" alt="Top Language">
+  <img src="https://img.shields.io/github/last-commit/zakocord/Lucent?color=c7f5ff" alt="Last Commit">
+  <img src="https://img.shields.io/github/stars/zakocord/Lucent?color=c7f5ff" alt="Stars">
   
   <br><br>
   <strong>✨ If you like it, don't forget to leave a ⭐! ✨</strong>
@@ -15,69 +15,72 @@
 ---
 
 ## 📌 Todo
-- [ ] 🖼 Better UI / Visual
+- [ ] 🖼 **Better UI / Visual**
 ---
 
-## 🔒 FUD Status
+## 🔒 **FUD Status**
 
-| Virustotal Detection | Status |
-|------------------|--------|
-| Total Engines    | 70     |
-| Detected         | 🟡     |
-| FUD Rate         | 82.9% |
+| **Virustotal Detection** | **Status** |
+|--------------------------|------------|
+| Total Engines             | 70         |
+| Detected                 | 🟡         |
+| FUD Rate                 | 82.9%      |
 
-| Uncover it | Status |
-|------------------|--------|
-| Detected         | 🔴 |
-| FUD Rate         | 0% |
+| **Uncover it** | **Status** |
+|----------------|------------|
+| Detected       | 🔴         |
+| FUD Rate       | 0%         |
 
-| Nordvpn | Status |
-|------------------|--------|
-| Detected         | 🟢 |
-| FUD Rate         | 100% |
+| **Nordvpn**    | **Status** |
+|----------------|------------|
+| Detected       | 🟢         |
+| FUD Rate       | 100%       |
 
-| Microsoft | Status |
-|------------------|--------|
-| Detected         | 🟢 |
-| FUD Rate         | 100.0% |
+| **Microsoft**  | **Status** |
+|----------------|------------|
+| Detected       | 🟢         |
+| FUD Rate       | 100.0%     |
 
-> > 🟢 Fully Undetectable | 🟡 Undetectable | 🔴 Detected | ❓ Unknown
-## 🚀 Features
-
-| Feature           | Status    |
-|------------------|-----------|
-| 🖼 Screenshot     | 🟢 Working |
-| 🌐 IP Logger      | 🟢 Working |
-| 🖥 Machine Info   | 🟢 Working |
-| 🍪 Cookie Grab    | 🟢 Working |
-| 🎟 Token Grabber  | 🟢 Working |
-
-> 🟢 Working | 🟡 Testing | 🔴 Not Working | ❓ Insecure / Experimental
+> 🟢 **Fully Undetectable** | 🟡 **Undetectable** | 🔴 **Detected** | ❓ **Unknown**
 
 ---
 
-## 🧠 Requirements
+## 🚀 **Features**
 
-- Python 3.10+
-- Brain (🧠 Use responsibly)
-- Windows 10 or 11
+| **Feature**        | **Status**    |
+|--------------------|---------------|
+| 🖼 **Screenshot**   | 🟢 **Working** |
+| 🌐 **IP Logger**    | 🟢 **Working** |
+| 🖥 **Machine Info** | 🟢 **Working** |
+| 🍪 **Cookie Grab**  | 🟢 **Working** |
+| 🎟 **Token Grabber**| 🟢 **Working** |
+
+> 🟢 **Working** | 🟡 **Testing** | 🔴 **Not Working** | ❓ **Insecure / Experimental**
 
 ---
 
-## 💻 Supported Platforms
+## 🧠 **Requirements**
 
-- ✅ Windows Only
+- **Python 3.10+**
+- **Brain** 🧠 (Use responsibly)
+- **Windows 10 or 11**
 
 ---
 
-## 📦 Installation
+## 💻 **Supported Platforms**
 
-> 🤷 idk yet... stay tuned or DIY.
+- ✅ **Windows Only**
+
+---
+
+## 📦 **Installation**
+
+> 🤷 **idk yet... stay tuned or DIY.**
 
 ---
 
 <div align="center">
   
-  <sub>© 2025 Lucent by zakocord | All rights reserved. For educational use only.</sub>
+  <sub>© 2025 **Lucent** by **zakocord** | All rights reserved. For educational use only.</sub>
 
 </div>
