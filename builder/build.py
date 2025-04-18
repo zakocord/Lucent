@@ -83,7 +83,7 @@ def build_exe(method):
 
     try:
         if method == "pyinstaller":
-            subprocess.run(["pyinstaller", "--onefile", "-noconsole", target_file], check=True)
+            subprocess.run(["pyinstaller", "--onefile", target_file], check=True)
         print(f"{Fore.GREEN}[SUCCESS] {Fore.RESET} Executable built successfully.")
     except subprocess.CalledProcessError:
         print(f"{Fore.YELLOW}[WARN] {Fore.RESET} Failed to build with {method}.")
