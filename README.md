@@ -51,7 +51,7 @@
 | 🌐 IP Logger      | 🟢 Working |
 | 🖥 Machine Info   | 🟢 Working |
 | 🍪 Cookie Grab    | 🟢 Working |
-| 🎟 Token Grabber  | 🔴 ERROR |
+| 🎟 Token Grabber  | 🟢 Working |
 
 > 🟢 Working | 🟡 Testing | 🔴 Not Working | ❓ Insecure / Experimental
 
