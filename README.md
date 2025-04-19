@@ -12,6 +12,16 @@
   <br><br>
 </div>
 
+--- 
+
+<div align="center">
+  
+  <h1>⚠️ Warning ⚠️</h1>
+  <p>The developer is not responsible for any damage or legal consequences that may arise from the use of this tool.<p>
+
+</div>
+
+
 ---
 
 ## 📌 Todo
@@ -87,7 +97,7 @@
 > 🤷 **idk yet... stay tuned or DIY.**
 
 ---
-
+---
 <div align="center">
   
   <sub>© 2025 **Lucent** by **zakocord** | All rights reserved. For educational use only.</sub>
