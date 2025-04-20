@@ -25,6 +25,7 @@
 # 📣 Announce
 ### This project has been discontinued
 ### (Update when discord applies PATCH)
+### (Soon New project)
 
 ---
 
