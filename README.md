@@ -21,6 +21,10 @@
 
 </div>
 
+---
+# 📣 Announce
+### This project has been suspended.
+### (Update when discord applies PATCH)
 
 ---
 
