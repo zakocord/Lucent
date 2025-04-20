@@ -23,7 +23,7 @@
 
 ---
 # 📣 Announce
-### This project has been suspended.
+### This project has been discontinued
 ### (Update when discord applies PATCH)
 
 ---
