@@ -17,7 +17,10 @@
 <div align="center">
   
   <h1>⚠️ Warning ⚠️</h1>
-  <p>The developer is not responsible for any damage or legal consequences that may arise from the use of this tool.<p>
+  <p>This project will soon be unsupported! PATCH, even if there are bugs, no fixes will be provided<p>
+  <p>↓ New Project ↓<p>
+  <p>https://github.com/zakocord/Astryrean<p>
+  <p>↑ New Project ↑<p>
 
 </div>
 
