@@ -22,12 +22,6 @@
 </div>
 
 ---
-# 📣 Announce
-### This project has been discontinued
-### (Update when discord applies PATCH)
-### (Soon New project)
-
----
 
 ## 📌 Todo
 - [ ] 🖼 **Better UI / Visual**
