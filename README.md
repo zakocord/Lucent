@@ -16,11 +16,7 @@
 
 <div align="center">
   
-  <h1>⚠️ Warning ⚠️</h1>
-  <p>This project will soon be unsupported! PATCH, even if there are bugs, no fixes will be provided<p>
-  <p>↓ New Project ↓<p>
-  <p>https://github.com/zakocord/Astryrean<p>
-  <p>↑ New Project ↑<p>
+  <h1>Our adventure continues</h1>
 
 </div>
 
